@@ -6,111 +6,49 @@
 //
 
 import UIKit
-import QuartzCore
 import SceneKit
 
 class GameViewController: UIViewController {
 
+    var sceneView: SCNView!
+    var scene: SCNScene!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // create and add a camera to the scene
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        scene.rootNode.addChildNode(cameraNode)
-        
-        // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
-        
-        // create and add a light to the scene
-        let lightNode = SCNNode()
-        lightNode.light = SCNLight()
-        lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-        scene.rootNode.addChildNode(lightNode)
-        
-        // create and add an ambient light to the scene
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = UIColor.darkGray
-        scene.rootNode.addChildNode(ambientLightNode)
-        
-        // retrieve the ship node
-        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
-        
-        // animate the 3d object
-        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
-        
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
-        
-        // set the scene to the view
-        scnView.scene = scene
-        
-        // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
-        
-        // show statistics such as fps and timing information
-        scnView.showsStatistics = true
-        
-        // configure the view
-        scnView.backgroundColor = UIColor.black
-        
-        // add a tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        scnView.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc
-    func handleTap(_ gestureRecognize: UIGestureRecognizer) {
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
-        
-        // check what nodes are tapped
-        let p = gestureRecognize.location(in: scnView)
-        let hitResults = scnView.hitTest(p, options: [:])
-        // check that we clicked on at least one object
-        if hitResults.count > 0 {
-            // retrieved the first clicked object
-            let result = hitResults[0]
-            
-            // get its material
-            let material = result.node.geometry!.firstMaterial!
-            
-            // highlight it
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.5
-            
-            // on completion - unhighlight
-            SCNTransaction.completionBlock = {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.5
+        self.sceneView = view as! SCNView
+        self.scene = SCNScene(named: "MainScene.scn")!
+        sceneView.scene = scene
                 
-                material.emission.contents = UIColor.black
-                
-                SCNTransaction.commit()
-            }
-            
-            material.emission.contents = UIColor.red
-            
-            SCNTransaction.commit()
+        let square = UIBezierPath(rect: CGRect(x: -0.5, y: -0.5, width: 1, height: 1))
+        let shape = SCNShape(path: square, extrusionDepth: 0.1)
+        shape.chamferRadius = 0.05
+        
+        var material = SCNMaterial()
+        if shape.materials.isEmpty {
+            shape.insertMaterial(material, at: 0)
+        } else {
+            material = shape.materials[0]
         }
+        material.diffuse.contents = UIColor.red
+        material.specular.contents = UIColor.white
+        material.shininess = 0.1
+     
+        let node = SCNNode(geometry: shape)
+        scene.rootNode.addChildNode(node)
+        
+        let light = SCNLight()
+        light.type = .omni
+        light.intensity = 5000
+        light.temperature = CGFloat(3500)
+        
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = SCNVector3(x: 0.5, y: 0.5, z: 0.5)
+        scene.rootNode.addChildNode(lightNode)
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
-    }
-
 }

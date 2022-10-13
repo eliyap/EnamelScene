@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		C679FFDC28F8C46100D3804E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C679FFDB28F8C46100D3804E /* AppDelegate.swift */; };
-		C679FFDE28F8C46100D3804E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = C679FFDD28F8C46100D3804E /* art.scnassets */; };
 		C679FFE028F8C46100D3804E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C679FFDF28F8C46100D3804E /* GameViewController.swift */; };
 		C679FFE328F8C46100D3804E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C679FFE128F8C46100D3804E /* Main.storyboard */; };
 		C679FFE528F8C46200D3804E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C679FFE428F8C46200D3804E /* Assets.xcassets */; };
 		C679FFE828F8C46200D3804E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C679FFE628F8C46200D3804E /* LaunchScreen.storyboard */; };
+		C679FFF028F8D0B900D3804E /* MainScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = C679FFEF28F8D0B900D3804E /* MainScene.scn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C679FFD828F8C46100D3804E /* EnamelScene.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnamelScene.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C679FFDB28F8C46100D3804E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C679FFDD28F8C46100D3804E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		C679FFDF28F8C46100D3804E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		C679FFE228F8C46100D3804E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C679FFE428F8C46200D3804E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C679FFE728F8C46200D3804E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C679FFEF28F8D0B900D3804E /* MainScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = MainScene.scn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,14 +55,22 @@
 		C679FFDA28F8C46100D3804E /* EnamelScene */ = {
 			isa = PBXGroup;
 			children = (
+				C679FFEE28F8D09800D3804E /* art.scnassets */,
 				C679FFDB28F8C46100D3804E /* AppDelegate.swift */,
-				C679FFDD28F8C46100D3804E /* art.scnassets */,
 				C679FFDF28F8C46100D3804E /* GameViewController.swift */,
 				C679FFE128F8C46100D3804E /* Main.storyboard */,
 				C679FFE428F8C46200D3804E /* Assets.xcassets */,
 				C679FFE628F8C46200D3804E /* LaunchScreen.storyboard */,
 			);
 			path = EnamelScene;
+			sourceTree = "<group>";
+		};
+		C679FFEE28F8D09800D3804E /* art.scnassets */ = {
+			isa = PBXGroup;
+			children = (
+				C679FFEF28F8D0B900D3804E /* MainScene.scn */,
+			);
+			path = art.scnassets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,9 +131,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C679FFDE28F8C46100D3804E /* art.scnassets in Resources */,
 				C679FFE828F8C46200D3804E /* LaunchScreen.storyboard in Resources */,
 				C679FFE528F8C46200D3804E /* Assets.xcassets in Resources */,
+				C679FFF028F8D0B900D3804E /* MainScene.scn in Resources */,
 				C679FFE328F8C46100D3804E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
