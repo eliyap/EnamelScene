@@ -159,36 +159,32 @@ func intersect(line1: (a: CGPoint, b: CGPoint), line2: (a: CGPoint, b: CGPoint))
 //
 //    return (0...1).contains(u) && (0...1).contains(v)
     
-    return lineIntersection(p0_x: line1.a.x, p0_y: line1.a.y, p1_x: line1.b.x, p1_y: line1.b.y, p2_x: line2.a.x, p2_y: line2.a.y, p3_x: line2.b.x, p3_y: line2.b.y) != nil
+    
+    return lineIntersection(p0: line1.a, p1: line1.b, p2: line2.a, p3: line2.b) != nil
 }
 
 func lineIntersection(
-  p0_x: Double, p0_y: Double,
-  p1_x: Double, p1_y: Double,
-  p2_x: Double, p2_y: Double,
-  p3_x: Double, p3_y: Double
-) -> (x: Double, y: Double)? {
-  let s1_x: Double
-  let s1_y: Double
-  let s2_x: Double
-  let s2_y: Double
+    p0: CGPoint, p1: CGPoint,
+    p2: CGPoint, p3: CGPoint
+) -> CGPoint? {
+    let s1 = CGPoint(
+        x: p1.x - p0.x,
+        y: p1.y - p0.y
+    )
+    let s2 = CGPoint(
+        x: p3.x - p2.x,
+        y: p3.y - p2.y
+    )
   
-  s1_x = p1_x - p0_x
-  s1_y = p1_y - p0_y
-  
-  s2_x = p3_x - p2_x
-  s2_y = p3_y - p2_y
-  
-  let s: Double
-  let t: Double
-  s = (-s1_y * (p0_x - p2_x) + s1_x * (p0_y - p2_y)) / (-s2_x * s1_y + s1_x * s2_y);
-  t = ( s2_x * (p0_y - p2_y) - s2_y * (p0_x - p2_x)) / (-s2_x * s1_y + s1_x * s2_y);
-  
-  if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
-    let i_x = p0_x + (t * s1_x);
-    let i_y = p0_y + (t * s1_y);
-    return (i_x, i_y)
-  }
-  
-  return nil
+    let s: Double = (-s1.y * (p0.x - p2.x) + s1.x * (p0.y - p2.y)) / (-s2.x * s1.y + s1.x * s2.y)
+    let t: Double = ( s2.x * (p0.y - p2.y) - s2.y * (p0.x - p2.x)) / (-s2.x * s1.y + s1.x * s2.y)
+    
+    if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
+        return CGPoint(
+            x: p0.x + (t * s1.x),
+            y: p0.y + (t * s1.y)
+        )
+    } else {
+        return nil
+    }
 }
