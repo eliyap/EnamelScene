@@ -30,9 +30,12 @@ class GameViewController: UIViewController {
         } else {
             material = shape.materials[0]
         }
+        material.lightingModel = .physicallyBased
         material.diffuse.contents = UIColor.red
-        material.specular.contents = UIColor.white
-        material.shininess = 0.1
+        material.clearCoat.contents = UIColor(white: 1, alpha: 0.1)
+        material.clearCoat.intensity = 0.1
+        material.clearCoatNormal.contents = UIColor(white: 1, alpha: 0.1)
+        material.clearCoatNormal.intensity = 1.0
      
         let node = SCNNode(geometry: shape)
         scene.rootNode.addChildNode(node)
