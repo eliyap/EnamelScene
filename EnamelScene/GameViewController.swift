@@ -7,6 +7,7 @@
 
 import UIKit
 import SceneKit
+import CoreText
 
 class GameViewController: UIViewController {
 
@@ -55,4 +56,19 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+}
+
+func path() -> CGPath? {
+    guard let fontURL = Bundle.main.url(forResource: "SF-Pro", withExtension: "ttf") else {
+        return nil
+    }
+    let fontDescriptor = CTFontManagerCreateFontDescriptorsFromURL(fontURL as CFURL) as! [CTFontDescriptor]
+    let ctFont = CTFontCreateWithFontDescriptor(fontDescriptor[0], 24.0, nil)
+    
+    let str: NSString = "􁝁"
+    let unichars: [unichar] = makeUnichars(from: str as NSString)
+    var glyphs = [CGGlyph](repeating: .zero, count: str.length)
+    let succeeded = CTFontGetGlyphsForCharacters(ctFont, unichars, &glyphs, str.length)
+    
+    return CTFontCreatePathForGlyph(ctFont, glyphs[0], nil)
 }
