@@ -41,13 +41,13 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(node)
         
         let light = SCNLight()
-        light.type = .omni
+        light.type = .area
         light.intensity = 5000
         light.temperature = CGFloat(3500)
         
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = SCNVector3(x: 0.5, y: 0.5, z: 0.5)
+        lightNode.position = SCNVector3(x: 0.25, y: 0.25, z: 0.25)
         scene.rootNode.addChildNode(lightNode)
     }
     
