@@ -35,11 +35,8 @@ class GameViewController: UIViewController {
             material = shape.materials[0]
         }
         material.lightingModel = .physicallyBased
-        material.diffuse.contents = UIColor.red
-        material.clearCoat.contents = UIColor(white: 1, alpha: 0.1)
-        material.clearCoat.intensity = 0.1
-        material.clearCoatNormal.contents = UIColor(white: 1, alpha: 0.1)
-        material.clearCoatNormal.intensity = 1.0
+        material.diffuse.contents = UIColor.blue
+        material.roughness.intensity = 0 /// Makes material perfectly "glossy", reflecting light's shape
      
         let node = SCNNode(geometry: shape)
         scene.rootNode.addChildNode(node)
