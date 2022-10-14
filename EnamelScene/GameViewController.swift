@@ -20,9 +20,13 @@ class GameViewController: UIViewController {
         self.scene = SCNScene(named: "MainScene.scn")!
         sceneView.scene = scene
                 
-        let square = UIBezierPath(rect: CGRect(x: -0.5, y: -0.5, width: 1, height: 1))
+        let square = UIBezierPath(
+            roundedRect: CGRect(x: -0.5, y: -0.5, width: 1, height: 1),
+            cornerRadius: 0.05
+        )
         let shape = SCNShape(path: square, extrusionDepth: 0.1)
         shape.chamferRadius = 0.05
+        shape.chamferMode = .front
         
         var material = SCNMaterial()
         if shape.materials.isEmpty {
