@@ -68,7 +68,9 @@ func path() -> CGPath? {
     let str: NSString = "􁝁"
     let unichars: [unichar] = makeUnichars(from: str as NSString)
     var glyphs = [CGGlyph](repeating: .zero, count: str.length)
-    let succeeded = CTFontGetGlyphsForCharacters(ctFont, unichars, &glyphs, str.length)
+    guard CTFontGetGlyphsForCharacters(ctFont, unichars, &glyphs, str.length) else {
+        return nil
+    }
     
     return CTFontCreatePathForGlyph(ctFont, glyphs[0], nil)
 }
