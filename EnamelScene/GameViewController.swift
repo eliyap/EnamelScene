@@ -59,12 +59,16 @@ class GameViewController: UIViewController {
 }
 
 func path() -> CGPath? {
+    let fontSize: CGFloat = 24
+    
+    /// Get SF Pro font containing SF Symbols.
     guard let fontURL = Bundle.main.url(forResource: "SF-Pro", withExtension: "ttf") else {
         return nil
     }
     let fontDescriptor = CTFontManagerCreateFontDescriptorsFromURL(fontURL as CFURL) as! [CTFontDescriptor]
-    let ctFont = CTFontCreateWithFontDescriptor(fontDescriptor[0], 24.0, nil)
+    let ctFont = CTFontCreateWithFontDescriptor(fontDescriptor[0], fontSize, nil)
     
+    /// Get `CGGlyph`s from SF Symbol.
     let str: NSString = "􁝁"
     let unichars: [unichar] = makeUnichars(from: str as NSString)
     var glyphs = [CGGlyph](repeating: .zero, count: str.length)
@@ -72,5 +76,23 @@ func path() -> CGPath? {
         return nil
     }
     
-    return CTFontCreatePathForGlyph(ctFont, glyphs[0], nil)
+    /// Create and transform glyph `CGPath`.
+    /// It is normalized to 1x1 and centered.
+    guard var glyphPath = CTFontCreatePathForGlyph(ctFont, glyphs[0], nil) else {
+        return nil
+    }
+    var scaleDown = CGAffineTransform(scaleX: 1/fontSize, y: 1/fontSize)
+    guard let scaledDown = glyphPath.copy(using: &scaleDown) else {
+        return nil
+    }
+    
+    glyphPath = scaledDown
+    let box = glyphPath.boundingBox
+    var center = CGAffineTransform(translationX: -box.midX, y: -box.midY)
+    guard let centered = glyphPath.copy(using: &center) else {
+        return nil
+    }
+    glyphPath = centered
+    
+    return glyphPath
 }
