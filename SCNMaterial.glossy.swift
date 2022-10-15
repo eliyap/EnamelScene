@@ -10,10 +10,8 @@ import SceneKit
 extension SCNMaterial {
     /// A "glossy" material that reflects an area light's edges.
     static func glossy() -> SCNMaterial {
-        var material = SCNMaterial()
+        let material = SCNMaterial()
         material.lightingModel = .physicallyBased
-        material.metalness.contents = UIColor.white
-        material.metalness.intensity = 1.0
         material.roughness.intensity = 0
         return material
     }
