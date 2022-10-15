@@ -74,10 +74,9 @@ func path(symbol: NSString, scale: CGFloat = 5) -> CGPath? {
     let ctFont = CTFontCreateWithFontDescriptor(fontDescriptor, fontSize, nil)
     
     /// Get `CGGlyph`s from SF Symbol.
-    let str: NSString = "􁝁"
-    let unichars: [unichar] = makeUnichars(from: str as NSString)
-    var glyphs = [CGGlyph](repeating: .zero, count: str.length)
-    guard CTFontGetGlyphsForCharacters(ctFont, unichars, &glyphs, str.length) else {
+    let unichars: [unichar] = makeUnichars(from: symbol as NSString)
+    var glyphs = [CGGlyph](repeating: .zero, count: symbol.length)
+    guard CTFontGetGlyphsForCharacters(ctFont, unichars, &glyphs, symbol.length) else {
         return nil
     }
     
