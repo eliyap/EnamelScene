@@ -20,28 +20,73 @@ class GameViewController: UIViewController {
         self.sceneView = view as! SCNView
         self.scene = SCNScene(named: "MainScene.scn")!
         sceneView.scene = scene
-                
-        let square = UIBezierPath(
-            roundedRect: CGRect(x: -0.5, y: -0.5, width: 1, height: 1),
-            cornerRadius: 0.05
-        )
-        let shape = SCNShape(path: square, extrusionDepth: 0.1)
+
+        if let borderNode = borderNode(symbol: "􀣋") {
+            scene.rootNode.addChildNode(borderNode)
+        }
+        if let colorNode = colorNode(symbol: "􀣌") {
+            scene.rootNode.addChildNode(colorNode)
+        }
+        if let speechNode = speechNode(symbol: "􀌩") {
+            scene.rootNode.addChildNode(speechNode)
+        }
+        if let speechBorderNode = speechBorderNode(symbol: "􀌨") {
+            scene.rootNode.addChildNode(speechBorderNode)
+        }
+        
+        let plane = SCNPlane(width: 3, height: 3)
+        let material = SCNMaterial()
+        if plane.materials.isEmpty {
+            plane.insertMaterial(material, at: 0)
+        } else {
+            plane.materials[0] = material
+        }
+        material.diffuse.contents = UIColor.white
+        let node = SCNNode(geometry: plane)
+        node.position = .init(x: 0, y: 0, z: -0.4)
+        scene.rootNode.addChildNode(node)
+        
+
+        initAmbientLight()
+//        initDirectionalLight()
+        initAreaLight(intensity: 2000)
+        initCamera()
     }
     
     func initAmbientLight() {
         let light = SCNLight()
         light.type = .ambient
-        light.intensity = 1000
+        light.intensity = 100
         light.temperature = CGFloat(7000)
-        light.shadowRadius = 0
+//        light.shadowRadius = 0
 
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = SCNVector3(x: 0, y: 0, z: 0.25)
         scene.rootNode.addChildNode(lightNode)
     }
     
-    func initAreaLight() {
+    func initDirectionalLight() {
+        let light = SCNLight()
+        light.type = .directional
+        light.spotInnerAngle = 10
+        light.spotOuterAngle = 145
+        light.intensity = 1000
+        light.temperature = CGFloat(7000)
+        
+        /// Defaults to `false`, set `true` to cast shadows.
+        light.castsShadow = true
+        light.shadowMode = .forward
+        light.shadowSampleCount = 512
+        light.shadowBias = 7.0
+        light.shadowRadius = 75
+
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = SCNVector3(x: 0, y: 0, z: 1)
+        scene.rootNode.addChildNode(lightNode)
+    }
+    
+    func initAreaLight(intensity: CGFloat) {
         let width: CGFloat = 10
         let height: CGFloat = 5
         
@@ -54,13 +99,13 @@ class GameViewController: UIViewController {
             NSValue(cgPoint: CGPoint(x: +width/2, y: height)),
             NSValue(cgPoint: CGPoint(x: -width/2, y: height)),
         ]
-        light.intensity = 200
+        light.intensity = intensity
         light.temperature = CGFloat(7000)
-        light.shadowRadius = 0
+        light.castsShadow = false
 
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = SCNVector3(x: 0, y: 0, z: 0.25)
+        lightNode.position = SCNVector3(x: 0, y: 0, z: 1)
         scene.rootNode.addChildNode(lightNode)
     }
     
@@ -69,90 +114,77 @@ class GameViewController: UIViewController {
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
         sceneView.pointOfView = cameraNode
-        cameraNode.position = SCNVector3(0, 0, 15)
+        cameraNode.position = SCNVector3(0, 0, 5)
     }
     
     func borderNode(symbol: NSString) -> SCNNode? {
-        shape.chamferRadius = 0.05
-        shape.chamferMode = .front
+        let config = NodeConfig(
+            symbol: "􀣋",
+            fontName: "SFPro-Regular",
+            color: .black,
+            scale: 1,
+            extrusionDepth: 0.2,
+            flatness: 0.015,
+            chamferRadius: 0.1,
+            material: { .glossy() },
+            category: (1 << 1)
+        )
         
-        var material = SCNMaterial.glossy()
-        if shape.materials.isEmpty {
-            shape.insertMaterial(material, at: 0)
-        } else {
-            shape.materials[0] = material
-        }
-        material.diffuse.contents = UIColor.black
-        
-        let node = SCNNode(geometry: shape)
-        scene.rootNode.addChildNode(node)
+        return symbolNode(config: config)
     }
     
     func colorNode(symbol: NSString) -> SCNNode? {
+        let config = NodeConfig(
+            symbol: "􀣌",
+            fontName: "SFPro-Regular",
+            color: UIColor(red: 69.0/256, green: 148.0/256, blue: 233.0/256, alpha: 1),
+            scale: 1,
+            extrusionDepth: 0.15,
+            flatness: 0.05,
+            chamferRadius: 0,
+            material: { .glossy() },
+            category: (1 << 1)
+        )
         
-        let light = SCNLight()
-        light.type = .area
-        light.intensity = 5000
-        light.temperature = CGFloat(3500)
+        return symbolNode(config: config)
+    }
+    
+    func speechBorderNode(symbol: NSString) -> SCNNode? {
+        let config = NodeConfig(
+            symbol: "􀌨",
+            fontName: "SFPro-Thin",
+            color: .black,
+            scale: 2,
+            extrusionDepth: 0.2,
+            position: SCNVector3(x: 0, y: -0.15, z: 0),
+            flatness: 0.015,
+            chamferRadius: 0.1,
+            material: { .glossy() },
+            category: (1 << 1)
+        )
         
-        let lightNode = SCNNode()
-        lightNode.light = light
-        lightNode.position = SCNVector3(x: 0.25, y: 0.25, z: 0.25)
-        scene.rootNode.addChildNode(lightNode)
-        var material = SCNMaterial.glossy()
-        if shape.materials.isEmpty {
-            shape.insertMaterial(material, at: 0)
-        } else {
-            shape.materials[0] = material
-        }
-        material.diffuse.contents = UIColor(red: 69.0/256, green: 148.0/256, blue: 233.0/256, alpha: 1)
+        return symbolNode(config: config)
+    }
+    
+    
+    func speechNode(symbol: NSString) -> SCNNode? {
+        let config = NodeConfig(
+            symbol: "􀌩",
+            fontName: "SFPro-Thin",
+            color: .white,
+            scale: 2,
+            extrusionDepth: 0.1,
+            position: SCNVector3(x: 0, y: -0.15, z: 0),
+            flatness: 0.05,
+            chamferRadius: 0,
+            material: { SCNMaterial() },
+            category: (1 << 1)
+        )
+        
+        return symbolNode(config: config)
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
-}
-
-func path(symbol: NSString, scale: CGFloat = 5) -> CGPath? {
-    let fontSize: CGFloat = 24
-    
-    /// Get SF Pro font containing SF Symbols.
-    guard let fontURL = Bundle.main.url(forResource: "SF-Pro", withExtension: "ttf") else {
-        return nil
-    }
-    let fontDescriptors = CTFontManagerCreateFontDescriptorsFromURL(fontURL as CFURL) as! [CTFontDescriptor]
-    let fontDescriptor = fontDescriptors.first { desc in
-        let attrs = CTFontDescriptorCopyAttributes(desc)
-        return NSDictionary(dictionary: attrs)["NSFontNameAttribute"] as? NSString == "SFPro-Regular" as NSString
-    }!
-        
-    let ctFont = CTFontCreateWithFontDescriptor(fontDescriptor, fontSize, nil)
-    
-    /// Get `CGGlyph`s from SF Symbol.
-    let unichars: [unichar] = makeUnichars(from: symbol as NSString)
-    var glyphs = [CGGlyph](repeating: .zero, count: symbol.length)
-    guard CTFontGetGlyphsForCharacters(ctFont, unichars, &glyphs, symbol.length) else {
-        return nil
-    }
-    
-    /// Create and transform glyph `CGPath`.
-    /// It is normalized to 1x1 and centered.
-    guard var glyphPath = CTFontCreatePathForGlyph(ctFont, glyphs[0], nil) else {
-        return nil
-    }
-    
-    var scaleDown = CGAffineTransform(scaleX: scale/fontSize, y: scale/fontSize)
-    guard let scaledDown = glyphPath.copy(using: &scaleDown) else {
-        return nil
-    }
-    
-    glyphPath = scaledDown
-    let box = glyphPath.boundingBox
-    var center = CGAffineTransform(translationX: -box.midX, y: -box.midY)
-    guard let centered = glyphPath.copy(using: &center) else {
-        return nil
-    }
-    glyphPath = centered
-    
-    return glyphPath
 }
