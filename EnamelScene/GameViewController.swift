@@ -88,6 +88,9 @@ class GameViewController: UIViewController {
      
         let node = SCNNode(geometry: shape)
         scene.rootNode.addChildNode(node)
+    }
+    
+    func colorNode(symbol: NSString) -> SCNNode? {
         
         let light = SCNLight()
         light.type = .area
