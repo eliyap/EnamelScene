@@ -58,7 +58,7 @@ class GameViewController: UIViewController {
     }
 }
 
-func path() -> CGPath? {
+func path(symbol: NSString, scale: CGFloat = 5, strokeWidth: CGFloat?) -> CGPath? {
     let fontSize: CGFloat = 24
     
     /// Get SF Pro font containing SF Symbols.
@@ -81,7 +81,8 @@ func path() -> CGPath? {
     guard var glyphPath = CTFontCreatePathForGlyph(ctFont, glyphs[0], nil) else {
         return nil
     }
-    var scaleDown = CGAffineTransform(scaleX: 1/fontSize, y: 1/fontSize)
+    
+    var scaleDown = CGAffineTransform(scaleX: scale/fontSize, y: scale/fontSize)
     guard let scaledDown = glyphPath.copy(using: &scaleDown) else {
         return nil
     }
