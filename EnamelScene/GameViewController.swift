@@ -76,16 +76,14 @@ class GameViewController: UIViewController {
         shape.chamferRadius = 0.05
         shape.chamferMode = .front
         
-        var material = SCNMaterial()
+        var material = SCNMaterial.glossy()
         if shape.materials.isEmpty {
             shape.insertMaterial(material, at: 0)
         } else {
-            material = shape.materials[0]
+            shape.materials[0] = material
         }
-        material.lightingModel = .physicallyBased
-        material.diffuse.contents = UIColor.blue
-        material.roughness.intensity = 0 /// Makes material perfectly "glossy", reflecting light's shape
-     
+        material.diffuse.contents = UIColor.black
+        
         let node = SCNNode(geometry: shape)
         scene.rootNode.addChildNode(node)
     }
@@ -101,6 +99,13 @@ class GameViewController: UIViewController {
         lightNode.light = light
         lightNode.position = SCNVector3(x: 0.25, y: 0.25, z: 0.25)
         scene.rootNode.addChildNode(lightNode)
+        var material = SCNMaterial.glossy()
+        if shape.materials.isEmpty {
+            shape.insertMaterial(material, at: 0)
+        } else {
+            shape.materials[0] = material
+        }
+        material.diffuse.contents = UIColor(red: 69.0/256, green: 148.0/256, blue: 233.0/256, alpha: 1)
     }
     
     override var prefersStatusBarHidden: Bool {
