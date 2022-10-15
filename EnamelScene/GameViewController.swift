@@ -26,6 +26,8 @@ class GameViewController: UIViewController {
             cornerRadius: 0.05
         )
         let shape = SCNShape(path: square, extrusionDepth: 0.1)
+    }
+    
     func initAmbientLight() {
         let light = SCNLight()
         light.type = .ambient
@@ -69,6 +71,8 @@ class GameViewController: UIViewController {
         sceneView.pointOfView = cameraNode
         cameraNode.position = SCNVector3(0, 0, 15)
     }
+    
+    func borderNode(symbol: NSString) -> SCNNode? {
         shape.chamferRadius = 0.05
         shape.chamferMode = .front
         
