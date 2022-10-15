@@ -65,8 +65,13 @@ func path(symbol: NSString, scale: CGFloat = 5) -> CGPath? {
     guard let fontURL = Bundle.main.url(forResource: "SF-Pro", withExtension: "ttf") else {
         return nil
     }
-    let fontDescriptor = CTFontManagerCreateFontDescriptorsFromURL(fontURL as CFURL) as! [CTFontDescriptor]
-    let ctFont = CTFontCreateWithFontDescriptor(fontDescriptor[0], fontSize, nil)
+    let fontDescriptors = CTFontManagerCreateFontDescriptorsFromURL(fontURL as CFURL) as! [CTFontDescriptor]
+    let fontDescriptor = fontDescriptors.first { desc in
+        let attrs = CTFontDescriptorCopyAttributes(desc)
+        return NSDictionary(dictionary: attrs)["NSFontNameAttribute"] as? NSString == "SFPro-Regular" as NSString
+    }!
+        
+    let ctFont = CTFontCreateWithFontDescriptor(fontDescriptor, fontSize, nil)
     
     /// Get `CGGlyph`s from SF Symbol.
     let str: NSString = "􁝁"
