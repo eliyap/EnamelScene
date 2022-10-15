@@ -8,6 +8,66 @@
 import Foundation
 import SceneKit
 
+func pinNode(symbol: NSString, border: NSString, color: UIColor) -> SCNNode {
+    let node = SCNNode()
+    
+    if let borderNode = symbolNode(config: NodeConfig(
+        symbol: border,
+        fontName: "SFPro-Regular",
+        color: .black,
+        scale: 1,
+        extrusionDepth: 0.2,
+        flatness: 0.015,
+        chamferRadius: 0.1,
+        material: { .glossy() }
+    )) {
+        node.addChildNode(borderNode)
+    }
+    if let colorNode = symbolNode(config: NodeConfig(
+        symbol: symbol,
+        fontName: "SFPro-Regular",
+//            color: UIColor(red: 69.0/256, green: 148.0/256, blue: 233.0/256, alpha: 1),
+        color: color,
+        scale: 1,
+        extrusionDepth: 0.15,
+        flatness: 0.05,
+        chamferRadius: 0,
+        material: { .glossy() }
+    )) {
+        node.addChildNode(colorNode)
+    }
+    if let speechNode = symbolNode(config: NodeConfig(
+        symbol: "􀌩",
+        fontName: "SFPro-Thin",
+        color: UIColor(white: 0.87, alpha: 1),
+        scale: 2,
+        extrusionDepth: 0.1,
+        position: SCNVector3(x: 0, y: -0.15, z: 0),
+        flatness: 0.05,
+        chamferRadius: 0,
+        material: { SCNMaterial() },
+        /// Nodes cast shadows on each other; we only want the general shadow.
+        castsShadow: true
+    )) {
+        node.addChildNode(speechNode)
+    }
+    if let speechBorderNode = symbolNode(config: NodeConfig(
+        symbol: "􀌨",
+        fontName: "SFPro-Thin",
+        color: .black,
+        scale: 2,
+        extrusionDepth: 0.2,
+        position: SCNVector3(x: 0, y: -0.15, z: 0),
+        flatness: 0.015,
+        chamferRadius: 0.1,
+        material: { .glossy() }
+    )) {
+        node.addChildNode(speechBorderNode)
+    }
+    
+    return node
+}
+
 func symbolNode(config: NodeConfig) -> SCNNode? {
     guard let cgPath = path(config) else { return nil }
 
