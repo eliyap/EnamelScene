@@ -86,10 +86,14 @@ class GameViewController: UIViewController {
         light.shadowSampleCount = 512
         light.shadowBias = 7.0
         light.shadowRadius = 75
-
+        light.shadowCascadeCount = 4 /// Maximum value
+        
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = SCNVector3(x: 0, y: 0, z: 1)
+        
+        let angle: Float = -.pi / 8
+        lightNode.eulerAngles.x = angle
+        
         scene.rootNode.addChildNode(lightNode)
     }
     
