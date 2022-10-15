@@ -21,16 +21,56 @@ class GameViewController: UIViewController {
         self.scene = SCNScene(named: "MainScene.scn")!
         sceneView.scene = scene
 
-        if let borderNode = borderNode(symbol: "􀣋") {
+        if let borderNode = symbolNode(config: NodeConfig(
+            symbol: "􀣋",
+            fontName: "SFPro-Regular",
+            color: .black,
+            scale: 1,
+            extrusionDepth: 0.2,
+            flatness: 0.015,
+            chamferRadius: 0.1,
+            material: { .glossy() }
+        )) {
             scene.rootNode.addChildNode(borderNode)
         }
-        if let colorNode = colorNode(symbol: "􀣌") {
+        if let colorNode = symbolNode(config: NodeConfig(
+            symbol: "􀣌",
+            fontName: "SFPro-Regular",
+            color: UIColor(red: 69.0/256, green: 148.0/256, blue: 233.0/256, alpha: 1),
+            scale: 1,
+            extrusionDepth: 0.15,
+            flatness: 0.05,
+            chamferRadius: 0,
+            material: { .glossy() }
+        )) {
             scene.rootNode.addChildNode(colorNode)
         }
-        if let speechNode = speechNode(symbol: "􀌩") {
+        if let speechNode = symbolNode(config: NodeConfig(
+            symbol: "􀌩",
+            fontName: "SFPro-Thin",
+            color: .white,
+            scale: 2,
+            extrusionDepth: 0.1,
+            position: SCNVector3(x: 0, y: -0.15, z: 0),
+            flatness: 0.05,
+            chamferRadius: 0,
+            material: { SCNMaterial() },
+            /// Nodes cast shadows on each other; we only want the general shadow.
+            castsShadow: true
+        )) {
             scene.rootNode.addChildNode(speechNode)
         }
-        if let speechBorderNode = speechBorderNode(symbol: "􀌨") {
+        if let speechBorderNode = symbolNode(config: NodeConfig(
+            symbol: "􀌨",
+            fontName: "SFPro-Thin",
+            color: .black,
+            scale: 2,
+            extrusionDepth: 0.2,
+            position: SCNVector3(x: 0, y: -0.15, z: 0),
+            flatness: 0.015,
+            chamferRadius: 0.1,
+            material: { .glossy() }
+        )) {
             scene.rootNode.addChildNode(speechBorderNode)
         }
         
@@ -48,7 +88,7 @@ class GameViewController: UIViewController {
         
 
         initAmbientLight()
-//        initDirectionalLight()
+        initDirectionalLight()
         initAreaLight(intensity: 2000)
         initCamera()
     }
@@ -58,7 +98,6 @@ class GameViewController: UIViewController {
         light.type = .ambient
         light.intensity = 100
         light.temperature = CGFloat(7000)
-//        light.shadowRadius = 0
 
         let lightNode = SCNNode()
         lightNode.light = light
@@ -68,8 +107,6 @@ class GameViewController: UIViewController {
     func initDirectionalLight() {
         let light = SCNLight()
         light.type = .directional
-        light.spotInnerAngle = 10
-        light.spotOuterAngle = 145
         light.intensity = 1000
         light.temperature = CGFloat(7000)
         
@@ -115,73 +152,6 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(cameraNode)
         sceneView.pointOfView = cameraNode
         cameraNode.position = SCNVector3(0, 0, 5)
-    }
-    
-    func borderNode(symbol: NSString) -> SCNNode? {
-        let config = NodeConfig(
-            symbol: "􀣋",
-            fontName: "SFPro-Regular",
-            color: .black,
-            scale: 1,
-            extrusionDepth: 0.2,
-            flatness: 0.015,
-            chamferRadius: 0.1,
-            material: { .glossy() },
-            category: (1 << 1)
-        )
-        
-        return symbolNode(config: config)
-    }
-    
-    func colorNode(symbol: NSString) -> SCNNode? {
-        let config = NodeConfig(
-            symbol: "􀣌",
-            fontName: "SFPro-Regular",
-            color: UIColor(red: 69.0/256, green: 148.0/256, blue: 233.0/256, alpha: 1),
-            scale: 1,
-            extrusionDepth: 0.15,
-            flatness: 0.05,
-            chamferRadius: 0,
-            material: { .glossy() },
-            category: (1 << 1)
-        )
-        
-        return symbolNode(config: config)
-    }
-    
-    func speechBorderNode(symbol: NSString) -> SCNNode? {
-        let config = NodeConfig(
-            symbol: "􀌨",
-            fontName: "SFPro-Thin",
-            color: .black,
-            scale: 2,
-            extrusionDepth: 0.2,
-            position: SCNVector3(x: 0, y: -0.15, z: 0),
-            flatness: 0.015,
-            chamferRadius: 0.1,
-            material: { .glossy() },
-            category: (1 << 1)
-        )
-        
-        return symbolNode(config: config)
-    }
-    
-    
-    func speechNode(symbol: NSString) -> SCNNode? {
-        let config = NodeConfig(
-            symbol: "􀌩",
-            fontName: "SFPro-Thin",
-            color: .white,
-            scale: 2,
-            extrusionDepth: 0.1,
-            position: SCNVector3(x: 0, y: -0.15, z: 0),
-            flatness: 0.05,
-            chamferRadius: 0,
-            material: { SCNMaterial() },
-            category: (1 << 1)
-        )
-        
-        return symbolNode(config: config)
     }
     
     override var prefersStatusBarHidden: Bool {
