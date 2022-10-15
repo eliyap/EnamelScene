@@ -15,8 +15,6 @@
 		C679FFE828F8C46200D3804E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C679FFE628F8C46200D3804E /* LaunchScreen.storyboard */; };
 		C679FFF028F8D0B900D3804E /* MainScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = C679FFEF28F8D0B900D3804E /* MainScene.scn */; };
 		C69F90CD28F9D9C800454C61 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C69F90CC28F9D90700454C61 /* SF-Pro.ttf */; };
-		C69F90CF28F9F89200454C61 /* BezierSmooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69F90CE28F9F89200454C61 /* BezierSmooth.swift */; };
-		C69F90D128FA2F6B00454C61 /* CGPath.Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69F90D028FA2F6B00454C61 /* CGPath.Element.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,8 +27,6 @@
 		C679FFE728F8C46200D3804E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C679FFEF28F8D0B900D3804E /* MainScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = MainScene.scn; sourceTree = "<group>"; };
 		C69F90CC28F9D90700454C61 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
-		C69F90CE28F9F89200454C61 /* BezierSmooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierSmooth.swift; sourceTree = "<group>"; };
-		C69F90D028FA2F6B00454C61 /* CGPath.Element.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPath.Element.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,8 +43,6 @@
 		C679FFCF28F8C46100D3804E = {
 			isa = PBXGroup;
 			children = (
-				C69F90D028FA2F6B00454C61 /* CGPath.Element.swift */,
-				C69F90CE28F9F89200454C61 /* BezierSmooth.swift */,
 				C679003228F9B69800D3804E /* MakeUnichars.swift */,
 				C69F90CC28F9D90700454C61 /* SF-Pro.ttf */,
 				C679FFDA28F8C46100D3804E /* EnamelScene */,
@@ -158,8 +152,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C69F90D128FA2F6B00454C61 /* CGPath.Element.swift in Sources */,
-				C69F90CF28F9F89200454C61 /* BezierSmooth.swift in Sources */,
 				C679003328F9B69800D3804E /* MakeUnichars.swift in Sources */,
 				C679FFE028F8C46100D3804E /* GameViewController.swift in Sources */,
 				C679FFDC28F8C46100D3804E /* AppDelegate.swift in Sources */,
