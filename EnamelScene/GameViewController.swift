@@ -9,6 +9,8 @@ import UIKit
 import SceneKit
 import CoreText
 
+let colorTemp: CGFloat = 6500
+
 class GameViewController: UIViewController {
 
     var sceneView: SCNView!
@@ -93,22 +95,23 @@ class GameViewController: UIViewController {
         initCamera()
     }
     
-    func initAmbientLight() {
+    /// Lights everything; helps keep shadow plane invisible.
+    func initAmbientLight(intensity: CGFloat) {
         let light = SCNLight()
         light.type = .ambient
-        light.intensity = 100
-        light.temperature = CGFloat(7000)
+        light.intensity = intensity
+        light.temperature = colorTemp
 
         let lightNode = SCNNode()
         lightNode.light = light
         scene.rootNode.addChildNode(lightNode)
     }
     
-    func initDirectionalLight() {
+    func initDirectionalLight(intensity: CGFloat) {
         let light = SCNLight()
         light.type = .directional
-        light.intensity = 1000
-        light.temperature = CGFloat(7000)
+        light.intensity = intensity
+        light.temperature = colorTemp
         
         /// Defaults to `false`, set `true` to cast shadows.
         light.castsShadow = true
@@ -137,7 +140,7 @@ class GameViewController: UIViewController {
             NSValue(cgPoint: CGPoint(x: -width/2, y: height)),
         ]
         light.intensity = intensity
-        light.temperature = CGFloat(7000)
+        light.temperature = colorTemp
         light.castsShadow = false
 
         let lightNode = SCNNode()
@@ -146,12 +149,12 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(lightNode)
     }
     
-    func initCamera() {
+    func initCamera(distance: Float) {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
         sceneView.pointOfView = cameraNode
-        cameraNode.position = SCNVector3(0, 0, 5)
+        cameraNode.position = SCNVector3(0, 0, distance)
     }
     
     override var prefersStatusBarHidden: Bool {
