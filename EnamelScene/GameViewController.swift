@@ -24,26 +24,94 @@ class GameViewController: UIViewController {
         sceneView.scene = scene
 
         let gearPin = pinNode(symbol: "􀣌", border: "􀣋", color: .systemBlue)
-        gearPin.position = SCNVector3(x: 0, y: 0, z: 0)
+        gearPin.position = SCNVector3(x: -1.5, y: 0, z: 0)
         scene.rootNode.addChildNode(gearPin)
         
-        let heartPin = pinNode(symbol: "􀊵", border: "􀊴", color: .systemRed)
-        heartPin.position = SCNVector3(x: 2.5, y: 0, z: 0)
+        let heartPin = pinNode(symbol: "􀊵", border: "􀊴", color: .systemPink)
+        heartPin.position = SCNVector3(x: 1.5, y: 0, z: 0)
         scene.rootNode.addChildNode(heartPin)
         
         let gamePin = pinNode(symbol: "􀛹", border: "􀛸", color: .systemPurple)
-        gamePin.position = SCNVector3(x: -2.5, y: 0, z: 0)
+        gamePin.position = SCNVector3(x: -4.5, y: 0, z: 0)
         scene.rootNode.addChildNode(gamePin)
         
-        let trashPin = pinNode(symbol: "􀈒", border: "􀈑", color: .systemRed)
-        trashPin.position = SCNVector3(x: -2.5, y: +2, z: 0)
-        scene.rootNode.addChildNode(trashPin)
+        let bulbPin = pinNode(symbol: "􀛮", border: "􀛭", color: .systemYellow)
+        bulbPin.position = SCNVector3(x: +6, y: -2.5, z: 0)
+        scene.rootNode.addChildNode(bulbPin)
         
-        let boxPin = pinNode(symbol: "􀐛", border: "􀐚", color: .systemBrown)
-        boxPin.position = SCNVector3(x: +2.5, y: +2, z: 0)
-        scene.rootNode.addChildNode(boxPin)
+        let sofaPin = pinNode(symbol: "􁐳", border: "􁐲", color: .systemBrown)
+        sofaPin.position = SCNVector3(x: -3, y: -2.5, z: 0)
+        scene.rootNode.addChildNode(sofaPin)
+
+        let brushPin = pinNode(symbol: "􀡧", border: "􀡦", color: .systemRed)
+        brushPin.position = SCNVector3(x: 0, y: -2.5, z: 0)
+        scene.rootNode.addChildNode(brushPin)
+
+        let locPin = pinNode(symbol: "􀋒", border: "􀋑", color: .systemGreen)
+        locPin.position = SCNVector3(x: 3, y: +2.5, z: 0)
+        scene.rootNode.addChildNode(locPin)
         
-        let plane = SCNPlane(width: 3, height: 3)
+        let ejectPin = pinNode(symbol: "􀆦", border: "􀆥", color: .systemOrange)
+        ejectPin.position = SCNVector3(x: -3, y: +2.5, z: 0)
+        scene.rootNode.addChildNode(ejectPin)
+        
+        let fishPin = pinNode(symbol: "􁖑", border: "􁖐", color: .systemCyan)
+        fishPin.position = SCNVector3(x: 0, y: +2.5, z: 0)
+        scene.rootNode.addChildNode(fishPin)
+        
+        let volPin = pinNode(symbol: "􀚅", border: "􀇴", color: .systemCyan)
+        volPin.position = SCNVector3(x: 6, y: +2.5, z: 0)
+        scene.rootNode.addChildNode(volPin)
+        
+        let hammerPin = pinNode(symbol: "􀙅", border: "􀙄", color: .systemGray)
+        hammerPin.position = SCNVector3(x: -6, y: +2.5, z: 0)
+        scene.rootNode.addChildNode(hammerPin)
+        
+        let maskPin = pinNode(symbol: "􁃍", border: "􁃌", color: .systemCyan)
+        maskPin.position = SCNVector3(x: 3, y: -2.5, z: 0)
+        scene.rootNode.addChildNode(maskPin)
+        
+        let pawPin = pinNode(symbol: "􀾟", border: "􀾞", color: .systemBrown)
+        pawPin.position = SCNVector3(x: 4.5, y: 0, z: 0)
+        scene.rootNode.addChildNode(pawPin)
+        
+        let tapPin = pinNode(symbol: "􀬂", border: "􀬁", color: .systemCyan)
+        tapPin.position = SCNVector3(x: -6, y: -2.5, z: 0)
+        scene.rootNode.addChildNode(tapPin)
+        
+        
+//        let yPin = pinNode(symbol: "􀈖", border: "􀈕", color: .systemPink)
+//        yPin.position = SCNVector3(x: 3, y: +2.5, z: 0)
+//        scene.rootNode.addChildNode(yPin)
+        
+//        let brushPin = pinNode(symbol: "􀈠", border: "􀈟", color: .systemOrange)
+//        brushPin.position = SCNVector3(x: 0, y: -1.5, z: 0)
+//        scene.rootNode.addChildNode(brushPin)
+
+//        let brushPin = pinNode(symbol: "􀈬", border: "􀈫", color: .systemOrange)
+//        brushPin.position = SCNVector3(x: 0, y: -1, z: 0)
+//        scene.rootNode.addChildNode(brushPin)
+
+//        let clipPin = pinNode(symbol: "􀶷", border: "􀶶", color: .systemBrown)
+//        clipPin.position = SCNVector3(x: 0, y: -2, z: 0)
+//        scene.rootNode.addChildNode(clipPin)
+
+        
+//        let cloudPin = pinNode(symbol: "􀙋", border: "􀙊", color: .systemGreen)
+//        cloudPin.position = SCNVector3(x: -2.5, y: 2, z: 0)
+//        scene.rootNode.addChildNode(cloudPin)
+        
+//        let trashPin = pinNode(symbol: "􀈒", border: "􀈑", color: .darkGray)
+//        trashPin.position = SCNVector3(x: -2.5, y: +2, z: 0)
+//        scene.rootNode.addChildNode(trashPin)
+//
+//        let trashPin = pinNode(symbol: "􀪏", border: "􀩼", color: .darkGray)
+//        trashPin.position = SCNVector3(x: -2.5, y: +2, z: 0)
+//        scene.rootNode.addChildNode(trashPin)
+//
+//        let boxPin = pinNode(symbol: "􀐛", border: "􀐚", color: .systemBrown)
+//        boxPin.position = SCNVector3(x: +2.5, y: 0, z: 0)
+//        scene.rootNode.addChildNode(boxPin)
 
         initShadowPlane()
         initAmbientLight(intensity: 200)
