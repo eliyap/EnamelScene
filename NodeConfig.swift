@@ -20,5 +20,5 @@ struct NodeConfig {
     let flatness: CGFloat                       /// Lower = more detail.
     let chamferRadius: CGFloat
     let material: () -> SCNMaterial
-    var castsShadow = false
+    var castsShadow = true
 }
