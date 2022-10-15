@@ -44,6 +44,16 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(boxPin)
         
         let plane = SCNPlane(width: 3, height: 3)
+
+        initShadowPlane()
+        initAmbientLight(intensity: 200)
+        initDirectionalLight(intensity: 1000)
+        initAreaLight(intensity: 1000)
+        initCamera(distance: 5.5)
+    }
+    
+    func initShadowPlane() {
+        let plane = SCNPlane(width: 30, height: 30)
         let material = SCNMaterial()
         if plane.materials.isEmpty {
             plane.insertMaterial(material, at: 0)
@@ -52,14 +62,8 @@ class GameViewController: UIViewController {
         }
         material.diffuse.contents = UIColor.white
         let node = SCNNode(geometry: plane)
-        node.position = .init(x: 0, y: 0, z: -0.4)
+        node.position = .init(x: 0, y: 0, z: -0.25)
         scene.rootNode.addChildNode(node)
-        
-
-        initAmbientLight()
-        initDirectionalLight()
-        initAreaLight(intensity: 2000)
-        initCamera()
     }
     
     /// Lights everything; helps keep shadow plane invisible.
