@@ -16,6 +16,8 @@
 		C679FFF028F8D0B900D3804E /* MainScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = C679FFEF28F8D0B900D3804E /* MainScene.scn */; };
 		C69F90CD28F9D9C800454C61 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C69F90CC28F9D90700454C61 /* SF-Pro.ttf */; };
 		C69F90D528FA4BC600454C61 /* SCNMaterial.glossy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69F90D428FA4BC600454C61 /* SCNMaterial.glossy.swift */; };
+		C69F90D928FA55A200454C61 /* NodeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69F90D828FA55A200454C61 /* NodeConfig.swift */; };
+		C69F90DB28FA6BEC00454C61 /* SymbolNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69F90DA28FA6BEC00454C61 /* SymbolNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		C679FFEF28F8D0B900D3804E /* MainScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = MainScene.scn; sourceTree = "<group>"; };
 		C69F90CC28F9D90700454C61 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		C69F90D428FA4BC600454C61 /* SCNMaterial.glossy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNMaterial.glossy.swift; sourceTree = "<group>"; };
+		C69F90D828FA55A200454C61 /* NodeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeConfig.swift; sourceTree = "<group>"; };
+		C69F90DA28FA6BEC00454C61 /* SymbolNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,8 @@
 		C679FFCF28F8C46100D3804E = {
 			isa = PBXGroup;
 			children = (
+				C69F90DA28FA6BEC00454C61 /* SymbolNode.swift */,
+				C69F90D828FA55A200454C61 /* NodeConfig.swift */,
 				C69F90D428FA4BC600454C61 /* SCNMaterial.glossy.swift */,
 				C679003228F9B69800D3804E /* MakeUnichars.swift */,
 				C69F90CC28F9D90700454C61 /* SF-Pro.ttf */,
@@ -155,8 +161,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C69F90D928FA55A200454C61 /* NodeConfig.swift in Sources */,
 				C679003328F9B69800D3804E /* MakeUnichars.swift in Sources */,
 				C69F90D528FA4BC600454C61 /* SCNMaterial.glossy.swift in Sources */,
+				C69F90DB28FA6BEC00454C61 /* SymbolNode.swift in Sources */,
 				C679FFE028F8C46100D3804E /* GameViewController.swift in Sources */,
 				C679FFDC28F8C46100D3804E /* AppDelegate.swift in Sources */,
 			);
