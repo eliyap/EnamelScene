@@ -26,6 +26,49 @@ class GameViewController: UIViewController {
             cornerRadius: 0.05
         )
         let shape = SCNShape(path: square, extrusionDepth: 0.1)
+    func initAmbientLight() {
+        let light = SCNLight()
+        light.type = .ambient
+        light.intensity = 1000
+        light.temperature = CGFloat(7000)
+        light.shadowRadius = 0
+
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = SCNVector3(x: 0, y: 0, z: 0.25)
+        scene.rootNode.addChildNode(lightNode)
+    }
+    
+    func initAreaLight() {
+        let width: CGFloat = 10
+        let height: CGFloat = 5
+        
+        let light = SCNLight()
+        light.type = .area
+        light.areaType = .polygon
+        light.areaPolygonVertices = [
+            NSValue(cgPoint: CGPoint(x: -width/2, y: 0)),
+            NSValue(cgPoint: CGPoint(x: +width/2, y: 0)),
+            NSValue(cgPoint: CGPoint(x: +width/2, y: height)),
+            NSValue(cgPoint: CGPoint(x: -width/2, y: height)),
+        ]
+        light.intensity = 200
+        light.temperature = CGFloat(7000)
+        light.shadowRadius = 0
+
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = SCNVector3(x: 0, y: 0, z: 0.25)
+        scene.rootNode.addChildNode(lightNode)
+    }
+    
+    func initCamera() {
+        let cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        scene.rootNode.addChildNode(cameraNode)
+        sceneView.pointOfView = cameraNode
+        cameraNode.position = SCNVector3(0, 0, 15)
+    }
         shape.chamferRadius = 0.05
         shape.chamferMode = .front
         
