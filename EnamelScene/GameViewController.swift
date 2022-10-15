@@ -58,7 +58,7 @@ class GameViewController: UIViewController {
     }
 }
 
-func path(symbol: NSString, scale: CGFloat = 5, strokeWidth: CGFloat?) -> CGPath? {
+func path(symbol: NSString, scale: CGFloat = 5) -> CGPath? {
     let fontSize: CGFloat = 24
     
     /// Get SF Pro font containing SF Symbols.
