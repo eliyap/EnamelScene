@@ -23,58 +23,25 @@ class GameViewController: UIViewController {
         self.scene = SCNScene(named: "MainScene.scn")!
         sceneView.scene = scene
 
-        if let borderNode = symbolNode(config: NodeConfig(
-            symbol: "􀣋",
-            fontName: "SFPro-Regular",
-            color: .black,
-            scale: 1,
-            extrusionDepth: 0.2,
-            flatness: 0.015,
-            chamferRadius: 0.1,
-            material: { .glossy() }
-        )) {
-            scene.rootNode.addChildNode(borderNode)
-        }
-        if let colorNode = symbolNode(config: NodeConfig(
-            symbol: "􀣌",
-            fontName: "SFPro-Regular",
-            color: UIColor(red: 69.0/256, green: 148.0/256, blue: 233.0/256, alpha: 1),
-            scale: 1,
-            extrusionDepth: 0.15,
-            flatness: 0.05,
-            chamferRadius: 0,
-            material: { .glossy() }
-        )) {
-            scene.rootNode.addChildNode(colorNode)
-        }
-        if let speechNode = symbolNode(config: NodeConfig(
-            symbol: "􀌩",
-            fontName: "SFPro-Thin",
-            color: .white,
-            scale: 2,
-            extrusionDepth: 0.1,
-            position: SCNVector3(x: 0, y: -0.15, z: 0),
-            flatness: 0.05,
-            chamferRadius: 0,
-            material: { SCNMaterial() },
-            /// Nodes cast shadows on each other; we only want the general shadow.
-            castsShadow: true
-        )) {
-            scene.rootNode.addChildNode(speechNode)
-        }
-        if let speechBorderNode = symbolNode(config: NodeConfig(
-            symbol: "􀌨",
-            fontName: "SFPro-Thin",
-            color: .black,
-            scale: 2,
-            extrusionDepth: 0.2,
-            position: SCNVector3(x: 0, y: -0.15, z: 0),
-            flatness: 0.015,
-            chamferRadius: 0.1,
-            material: { .glossy() }
-        )) {
-            scene.rootNode.addChildNode(speechBorderNode)
-        }
+        let gearPin = pinNode(symbol: "􀣌", border: "􀣋", color: .systemBlue)
+        gearPin.position = SCNVector3(x: 0, y: 0, z: 0)
+        scene.rootNode.addChildNode(gearPin)
+        
+        let heartPin = pinNode(symbol: "􀊵", border: "􀊴", color: .systemRed)
+        heartPin.position = SCNVector3(x: 2.5, y: 0, z: 0)
+        scene.rootNode.addChildNode(heartPin)
+        
+        let gamePin = pinNode(symbol: "􀛹", border: "􀛸", color: .systemPurple)
+        gamePin.position = SCNVector3(x: -2.5, y: 0, z: 0)
+        scene.rootNode.addChildNode(gamePin)
+        
+        let trashPin = pinNode(symbol: "􀈒", border: "􀈑", color: .systemRed)
+        trashPin.position = SCNVector3(x: -2.5, y: +2, z: 0)
+        scene.rootNode.addChildNode(trashPin)
+        
+        let boxPin = pinNode(symbol: "􀐛", border: "􀐚", color: .systemBrown)
+        boxPin.position = SCNVector3(x: +2.5, y: +2, z: 0)
+        scene.rootNode.addChildNode(boxPin)
         
         let plane = SCNPlane(width: 3, height: 3)
         let material = SCNMaterial()
