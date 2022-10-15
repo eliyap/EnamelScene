@@ -26,9 +26,8 @@ func symbolNode(config: NodeConfig) -> SCNNode? {
     material.diffuse.contents = config.color
     
     let node = SCNNode(geometry: shape)
-    node.castsShadow = true
+    node.castsShadow = config.castsShadow
     node.position = config.position
-    node.categoryBitMask = config.category
     return node
 }
 
